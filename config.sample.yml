@@ -1,2 +1,6 @@
 KEY: 'key from twitter'
 SECRET: 'secret from twitter'
+api_uri: 'https://api.twitter.com/1.1'
+token_uri: 'https://api.twitter.com/oauth2/token'
+trends_path: '/trends/place.json'
+global_woeid: 1

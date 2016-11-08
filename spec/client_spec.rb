@@ -9,12 +9,18 @@ describe Twitter::Client do
 
   describe '#initialize' do
     it 'is initialized with a token' do
-      expect(@client.token).to eq 'fake_token'
+      expect(@client.instance_variable_get(:@token)).to eq 'fake_token'
     end
   end
-end
 
-def stub_auth
-  stub_request(:post, Twitter::Client::TOKEN_URI)
-  .to_return(status: 200, body: json({access_token: 'fake_token'}), headers: {})
+  describe '#fetch_trends' do
+    before do
+      stub_request(:get, /.*#{Twitter::TRENDS_PATH}.*/)
+      .to_return(status: 200, body: json([{trends: [{name: 'foo'}, {name: 'bar'}]}]), headers: {})
+    end
+
+    it 'returns an array of trend names' do
+      expect(@client.fetch_trends).to match_array ['foo', 'bar']
+    end
+  end
 end
