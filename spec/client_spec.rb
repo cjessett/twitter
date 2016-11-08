@@ -23,4 +23,15 @@ describe Twitter::Client do
       expect(@client.fetch_trends).to match_array ['foo', 'bar']
     end
   end
+
+  describe '#fetch_tweets_by_hashtag' do
+    before do
+      stub_request(:get, /.*#{Twitter::SEARCH_PATH}.*/)
+      .to_return(status: 200, body: json({statuses: [{text: 'tweet1'}, {text: 'tweet2'}]}), headers: {})
+    end
+
+    it 'returns an array of tweets' do
+      expect(@client.fetch_tweets_by_hashtag('#hashtag')).to match_array ['tweet1', 'tweet2']
+    end
+  end
 end

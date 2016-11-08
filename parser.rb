@@ -8,5 +8,9 @@ module Twitter
     def parse_trends(response)
       JSON.parse(response.body)[0]['trends'].map { |trend| trend['name'] }
     end
+
+    def parse_hashtag_tweets(response)
+      JSON.parse(response.body)['statuses'].map { |tweet| tweet['text'] }
+    end
   end
 end
