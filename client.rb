@@ -10,6 +10,7 @@ module Twitter
   TOKEN_URI    = CONFIG['token_uri'].freeze
   TRENDS_PATH  = CONFIG['trends_path'].freeze
   SEARCH_PATH  = CONFIG['search_path'].freeze
+  USER_PATH    = CONFIG['user_path'].freeze
   GLOBAL_WOEID = CONFIG['global_woeid'].freeze
 
   class Client
@@ -37,6 +38,16 @@ module Twitter
       hashtag = format_hashtag(hashtag)
       opts = { path: SEARCH_PATH, params: { q: hashtag, count: 10, result_type: 'recent' } }
       parse_hashtag_tweets(get(opts))
+    end
+
+    # Makes a get request to the search path with given hashtag
+    #   as a parameter and returns an array of 10 tweets
+    #
+    # @param hashtag [String]
+    # @return [Array] a list of 10 strings
+    def fetch_tweets_by_user(user)
+      opts = { path: USER_PATH, params: { screen_name: user, count: 10 } }
+      parse_user_tweets(get(opts))
     end
 
     private

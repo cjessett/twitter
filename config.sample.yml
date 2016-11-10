@@ -3,4 +3,6 @@ SECRET: 'secret from twitter'
 api_uri: 'https://api.twitter.com/1.1'
 token_uri: 'https://api.twitter.com/oauth2/token'
 trends_path: '/trends/place.json'
+search_path: '/search/tweets.json'
+user_path: '/statuses/user_timeline.json'
 global_woeid: 1

@@ -4,6 +4,7 @@ module Twitter
   module App
     TRENDS_OPTION  = '1'
     HASHTAG_OPTION = '2'
+    USER_OPTION    = '3'
     QUIT_KEY       = 'q'
 
     # Displays menu and handles user input
@@ -24,6 +25,9 @@ module Twitter
       when HASHTAG_OPTION
         puts 'Enter a hashtag:'
         display_tweets(client.fetch_tweets_by_hashtag(gets.chomp))
+      when USER_OPTION
+        puts 'Enter a username:'
+        display_tweets(client.fetch_tweets_by_user(gets.chomp))
       when QUIT_KEY
         exit
       end
@@ -33,6 +37,7 @@ module Twitter
       puts "\n What would you like to do?"
       puts "#{TRENDS_OPTION}. See global trending topics"
       puts "#{HASHTAG_OPTION}. See tweets by hashtag"
+      puts "#{USER_OPTION}. See tweets by user"
       puts "Type #{QUIT_KEY} to quit \n"
     end
 

@@ -12,5 +12,9 @@ module Twitter
     def parse_hashtag_tweets(response)
       JSON.parse(response.body)['statuses'].map { |tweet| tweet['text'] }
     end
+
+    def parse_user_tweets(response)
+      JSON.parse(response.body).map { |tweet| tweet['text'] }
+    end
   end
 end
